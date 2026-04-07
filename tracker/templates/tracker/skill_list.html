@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Skill Tracker</title>
+</head>
+
+<body>
+  <h1>My Professional Skills</h1>
+  <ul>
+    {% for skill in skills %}
+    <li>
+      <strong>{{ skill.name }}</strong> -
+      Category: {{ skill.category }} |
+      Status: {% if skill.is_learned %} Mastered ✅ {% else %} Learning ⏳ {% endif %}
+    </li>
+    {% empty %}
+    <li>No skills added yet. Go to /admin to add some!</li>
+    {% endfor %}
+  </ul>
+</body>
+
+</html>
