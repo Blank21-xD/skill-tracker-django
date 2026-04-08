@@ -1,23 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>My Skill Tracker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safal's Skill Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-  <h1>My Professional Skills</h1>
-  <ul>
-    {% for skill in skills %}
-    <li>
-      <strong>{{ skill.name }}</strong> -
-      Category: {{ skill.category }} |
-      Status: {% if skill.is_learned %} Mastered ✅ {% else %} Learning ⏳ {% endif %}
-    </li>
-    {% empty %}
-    <li>No skills added yet. Go to /admin to add some!</li>
-    {% endfor %}
-  </ul>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">My Professional Skill Tracker</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted">Tracking my progress for Australian Software Engineering roles.</p>
+
+            <ul class="list-group">
+              {% for skill in skills %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="mb-0">{{ skill.name }}</h5>
+                  <small class="text-secondary">{{ skill.category }}</small>
+                </div>
+                {% if skill.is_learned %}
+                <span class="badge bg-success rounded-pill">Mastered</span>
+                {% else %}
+                <span class="badge bg-warning text-dark rounded-pill">Learning...</span>
+                {% endif %}
+              </li>
+              {% empty %}
+              <li class="list-group-item">No skills added yet.</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
