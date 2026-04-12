@@ -6,5 +6,9 @@ class Skill(models.Model):
     category = models.CharField(max_length=50, default='General')
     is_learned = models.BooleanField(default=False)
 
+    class Meta:
+
+        ordering = ['-id']
+
     def __str__(self):
         return self.name
