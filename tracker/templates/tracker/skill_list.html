@@ -18,8 +18,7 @@
             <h2 class="mb-0">My Professional Skill Tracker</h2>
           </div>
           <div class="card-body">
-            <p class="text-muted">Tracking my progress for Australian Software Engineering roles.</p>
-
+            <p class="text-muted">Currently tracking <strong>{{ skills.count }}</strong> professional skills.</p>
             <form method="POST" class="mb-4 p-3 border rounded bg-white">
               {% csrf_token %} <div class="row g-3">
                 <div class="col-md-5">
