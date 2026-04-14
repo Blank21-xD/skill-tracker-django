@@ -19,3 +19,9 @@ def skill_list(request):
         'skills': all_skills,
         'form': form
     })
+
+
+def delete_skill(request, pk):
+    skill = Skill.objects.get(id=pk)  # Find the specific skill
+    skill.delete()  # Delete it from the database
+    return redirect('home')  # Send the user back to the main list

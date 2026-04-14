@@ -49,7 +49,11 @@
                 <span class="badge bg-success rounded-pill">Mastered</span>
                 {% else %}
                 <span class="badge bg-warning text-dark rounded-pill">Learning...</span>
-                {% endif %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ skill.name }} - {{ skill.category }}
+                <a href="{% url 'delete_skill' skill.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+              </li>
+              {% endif %}
               </li>
               {% empty %}
               <li class="list-group-item">No skills added yet.</li>
