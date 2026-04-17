@@ -12,15 +12,17 @@
 
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card shadow">
-          <div class="card-header bg-primary text-white">
-            <h2 class="mb-0">My Professional Skill Tracker</h2>
+      <div class="col-md-9">
+        <div class="card shadow border-0">
+          <div class="card-header bg-primary text-white py-3">
+            <h2 class="mb-0 h4">My Professional Skill Tracker</h2>
           </div>
           <div class="card-body">
             <p class="text-muted">Currently tracking <strong>{{ skills.count }}</strong> professional skills.</p>
-            <form method="POST" class="mb-4 p-3 border rounded bg-white">
-              {% csrf_token %} <div class="row g-3">
+
+            <form method="POST" class="mb-4 p-3 border rounded bg-white shadow-sm">
+              {% csrf_token %}
+              <div class="row g-3">
                 <div class="col-md-5">
                   {{ form.name }}
                 </div>
@@ -30,7 +32,7 @@
                 <div class="col-md-3 d-flex align-items-center">
                   <div class="form-check me-3">
                     {{ form.is_learned }}
-                    <label class="form-check-label">Mastered?</label>
+                    <label class="form-check-label small">Mastered?</label>
                   </div>
                   <button type="submit" class="btn btn-success w-100">Add</button>
                 </div>
@@ -38,25 +40,45 @@
             </form>
 
             <hr>
+
             <ul class="list-group">
               {% for skill in skills %}
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <h5 class="mb-0">{{ skill.name }}</h5>
-                  <small class="text-secondary">{{ skill.category }}</small>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <div class="d-flex align-items-center">
+                  <div class="me-3">
+                    <h5 class="mb-0">{{ skill.name }}</h5>
+                    <small class="text-secondary">{{ skill.category }}</small>
+                  </div>
+
+                  <div class="ms-2">
+                    {% if skill.priority >= 3 %}
+                    <span class="badge rounded-pill bg-danger">High Priority</span>
+                    {% elif skill.priority == 2 %}
+                    <span class="badge rounded-pill bg-info text-dark">Medium</span>
+                    {% else %}
+                    <span class="badge rounded-pill bg-secondary">Low</span>
+                    {% endif %}
+                  </div>
                 </div>
-                {% if skill.is_learned %}
-                <span class="badge bg-success">Mastered</span>
-                {% else %}
-                <span class="badge bg-warning text-dark">Learning...</span>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ skill.name }} - {{ skill.category }}
-                <a href="{% url 'delete_skill' skill.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
-              </li>
-              {% endif %}
+
+                <div class="d-flex align-items-center">
+                  <div class="me-4">
+                    {% if skill.is_learned %}
+                    <span class="badge bg-success">Mastered</span>
+                    {% else %}
+                    <span class="badge bg-warning text-dark">Learning...</span>
+                    {% endif %}
+                  </div>
+
+                  <a href="{% url 'delete_skill' skill.id %}" class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-trash"></i> Delete
+                  </a>
+                </div>
               </li>
               {% empty %}
-              <li class="list-group-item">No skills added yet.</li>
+              <li class="list-group-item text-center py-4">
+                <p class="text-muted mb-0">No skills added yet. Start building your career!</p>
+              </li>
               {% endfor %}
             </ul>
           </div>
