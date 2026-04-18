@@ -22,6 +22,6 @@ def skill_list(request):
 
 
 def delete_skill(request, pk):
-    skill = Skill.objects.get(id=pk)  # Find the specific skill
-    skill.delete()  # Delete it from the database
-    return redirect('home')  # Send the user back to the main list
+    skill = get_object_or_404(Skill, pk=pk)
+    skill.delete()
+    return redirect('skill_list')
